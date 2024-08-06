@@ -10,7 +10,7 @@
   ],
   "layers": [
     [
-       "&kp EQUAL",    "&kp N1",   "&kp N2",   "&kp N3",    "&kp N4", "&kp N5",             "&tog 1",                                                                            "&mo 3", "&kp N6", "&kp N7",   "&kp N8",    "&kp N9",     "&kp N0", "&kp MINUS",
+       "&kp EQUAL",    "&kp N1",   "&kp N2",   "&kp N3",    "&kp N4", "&kp N6",             "&tog 1",                                                                            "&mo 3", "&kp N6", "&kp N7",   "&kp N8",    "&kp N9",     "&kp N0", "&kp MINUS",
          "&kp TAB",  "&kp FSLH",    "&kp L",    "&kp Y",     "&kp P",  "&kp B",              "&none",                                                                            "&none",  "&kp Z",  "&kp F",    "&kp O",     "&kp U",      "&kp P",  "&kp BSLH",
          "&kp ESC",     "&kp C",    "&kp R",    "&kp S",     "&kp T",  "&kp G",              "&none", "&kp LCTRL", "&kp LALT",                      "&kp LGUI", "&kp RCTRL",     "&none",  "&kp M",  "&kp N",    "&kp E",     "&kp I",   "&kp SEMI",   "&kp SQT",
        "&kp LSHFT",     "&kp Q",    "&kp J",    "&kp V",     "&kp D",  "&kp K",                                    "&kp HOME",                     "&kp PG_UP",                            "&kp X",  "&kp H",    "&kp W", "&kp COMMA", "&kp PERIOD", "&kp RSHFT",
