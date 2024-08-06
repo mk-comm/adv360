@@ -2,5 +2,26 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
+      - name: Set up ZMK firmware
+        uses: zmkfirmware/zmk/.github/actions/setup@main
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build custom keymap
+        uses: zmkfirmware/zmk/.github/actions/build@main
+        with:
+          board: adv360                # Specify your board here, adjust as necessary
+          shield: adv360               # Specify your shield here, adjust as necessary
+          config-path: config          # Path to your custom keymap directory
+          keymap-file: adv360.keymap   # Specify your keymap file
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v2
+        with:
+          name: firmware
+          path: build/zephyr/zmk.uf2   # Adjust path if different format is needed
