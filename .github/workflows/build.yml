@@ -7,21 +7,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up ZMK firmware
-        uses: zmkfirmware/zmk/.github/actions/setup@main
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          python-version: '3.x'  # Specify the Python version
 
-      - name: Build custom keymap
-        uses: zmkfirmware/zmk/.github/actions/build@main
-        with:
-          board: adv360                # Specify your board here, adjust as necessary
-          shield: adv360               # Specify your shield here, adjust as necessary
-          config-path: config          # Path to your custom keymap directory
-          keymap-file: adv360.keymap   # Specify your keymap file
+      - name: Set up Zephyr environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            git cmake ninja-build gperf ccache dfu-util \
+            device-tree-compiler wget python3-pip python3-setuptools \
+            python3-wheel xz-utils file make gcc-arm-none-eabi
+          pip install --user -U west
+
+      - name: Initialize Zephyr workspace
+        run: |
+          west init -l app/
+          west update
+          west zephyr-export
+          pip install --user -r zephyr/scripts/requirements.txt
+
+      - name: Build firmware
+        run: |
+          west build -s app -b <your_board> -- -DZMK_CONFIG=$(pwd)/config
 
       - name: Upload firmware
         uses: actions/upload-artifact@v2
         with:
           name: firmware
-          path: build/zephyr/zmk.uf2   # Adjust path if different format is needed
+          path: build/zephyr/zmk.uf2   # Adjust
